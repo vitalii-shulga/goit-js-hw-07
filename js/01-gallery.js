@@ -41,15 +41,19 @@ function onGalleryItemClick(event) {
     return
   }
 
+  modalOpen(event)
+}
+
+function modalOpen(event) {
   const onGalleryItemClick = event.target.dataset.source
 
-  const instance = basicLightbox.create(`<img src="${onGalleryItemClick}" width="800" height="600">`)
-  instance.show()
+  const modal = basicLightbox.create(`<img src="${onGalleryItemClick}" width="800" height="600">`)
+  modal.show()
 
   window.addEventListener('keydown', event => {
-    if (event.code === 'Escape') {
-      instance.close()
-      console.log(e.code)
+    if (event.code !== 'Escape') {
+      return
     }
+    modal.close()
   })
 }
