@@ -45,9 +45,9 @@ function onGalleryItemClick(event) {
 }
 
 function modalOpen(event) {
-  const onGalleryItemClick = event.target.dataset.source
+  const galleryItemOriginal = event.target.dataset.source
 
-  const modal = basicLightbox.create(`<img src="${onGalleryItemClick}" width="800" height="600">`)
+  const modal = basicLightbox.create(`<img src="${galleryItemOriginal}" width="800" height="600">`)
   modal.show()
 
   window.addEventListener('keydown', event => {
