@@ -1,8 +1,6 @@
 import { galleryItems } from './gallery-items.js'
 // Change code below this line
 
-// console.log(galleryItems)
-
 // 1. Создание и рендер разметки по массиву данных galleryItems и предоставленному шаблону элемента галереи.
 // 2. Реализация делегирования на div.gallery и получение url большого изображения.
 // 3. Подключение скрипта и стилей библиотеки модального окна basicLightbox. Используй CDN сервис jsdelivr и добавь в проект
@@ -15,7 +13,7 @@ const galleryContainer = document.querySelector('.gallery')
 const cardsMarkup = createGalleryCardsMarkup(galleryItems)
 
 galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup)
-galleryContainer.addEventListener('click', onGalleryContainerClick)
+galleryContainer.addEventListener('click', onGalleryItemClick)
 
 function createGalleryCardsMarkup(galleryItems) {
   return galleryItems
@@ -36,6 +34,22 @@ function createGalleryCardsMarkup(galleryItems) {
     .join('')
 }
 
-function onGalleryContainerClick(event) {
+function onGalleryItemClick(event) {
   event.preventDefault()
+
+  if (event.target.nodeName !== 'IMG') {
+    return
+  }
+
+  const onGalleryItemClick = event.target.dataset.source
+
+  const instance = basicLightbox.create(`<img src="${onGalleryItemClick}" width="800" height="600">`)
+  instance.show()
+
+  window.addEventListener('keydown', event => {
+    if (event.code === 'Escape') {
+      instance.close()
+      console.log(e.code)
+    }
+  })
 }
